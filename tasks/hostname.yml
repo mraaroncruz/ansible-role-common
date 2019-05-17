@@ -1,0 +1,22 @@
+---
+- name: set hostname
+  hostname:
+    name: "{{ inventory_hostname }}"
+  ignore_errors: yes
+
+- name: /etc/hostname
+  copy:
+    dest: /etc/hostname
+    content: "{{ inventory_hostname }}\n"
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+
+- name: /etc/hosts
+  template:
+    dest: /etc/hosts
+    src: hosts.j2
+    owner: root
+    group: root
+    mode: 0644

@@ -1,0 +1,19 @@
+---
+
+- name: Install resolvconf
+  apt: name=resolvconf state=present
+
+- name: Tail file resolvconf
+  template:
+    dest: /etc/resolvconf/resolv.conf.d/tail
+    src: resolvconf_tail.j2
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart resolvconf
+
+- name: resolvconf - start and enable
+  service:
+    name: resolvconf
+    state: started
+    enabled: yes

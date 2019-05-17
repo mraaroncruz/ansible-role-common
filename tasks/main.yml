@@ -1,0 +1,19 @@
+---
+
+- import_tasks: apt.yml
+
+- import_tasks: unix_users.yml
+
+- import_tasks: openssh.yml
+
+- import_tasks: hostname.yml
+
+- import_tasks: ntp.yml
+
+- import_tasks: resolvconf.yml
+
+- import_tasks: locales.yml
+
+- import_tasks: ufw.yml
+
+- import_tasks: fail2ban.yml

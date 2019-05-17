@@ -1,0 +1,31 @@
+---
+- name: Ensure ufw is present
+  apt:
+    name: ufw
+
+- name: Default (incoming) policy
+  ufw:
+    policy: deny
+    direction: incoming
+
+- name: Default (outgoing) policy
+  ufw:
+    policy: allow
+    direction: outgoing
+
+- name: Allow ssh traffic
+  ufw:
+    rule: allow
+    direction: in
+    to_port: "{{ ssh_port }}"
+    proto: tcp
+
+- name: Rate limit SSH
+  ufw:
+    rule: limit
+    port: ssh
+    proto: tcp
+
+- name: Ensure UFW is enabled
+  ufw:
+    state: enabled

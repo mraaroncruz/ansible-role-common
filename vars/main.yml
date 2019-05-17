@@ -1,0 +1,16 @@
+---
+# ---- USERS ----
+unix_users:
+  - name: jht
+    state: present
+    groups: admin
+    has_root: true
+# ---- FAIL2BAN ----
+# Ban time in seconds
+fail2ban_bantime: 600
+# Interval of seconds in which X "maxretry" is allowed
+fail2ban_findtime: 30
+# Max retry possible into "findtime" interval before ban
+fail2ban_maxretry: 4
+# ---- PORTS ----
+ssh_port: 22

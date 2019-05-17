@@ -1,0 +1,36 @@
+---
+
+- name: Create group admin
+  group:
+    name: admin
+
+- name: Create admin users
+  user:
+    name: "{{ item.name }}"
+    shell: /bin/bash
+    groups: "{{ item.groups }}"
+    state: "{{ item.state }}"
+    append: yes
+  with_items: "{{ unix_users }}"
+
+- name: Allow admins to sudo without password
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%ADMIN ALL\='
+    line: '%ADMIN ALL=(ALL) NOPASSWD:ALL'
+    validate: 'visudo -cf %s'
+
+- name: Add admin public keys
+  authorized_key:
+    user: "{{ item.name }}"
+    key: "{{ lookup('file', './keys/' + item.name) }}"
+  with_items: "{{ unix_users }}"
+
+- name: Add admin public keys for root user
+  authorized_key:
+    user: root
+    key: "{{ lookup('file', './keys/' + item.name) }}"
+  when: item.has_root
+  with_items: "{{ unix_users }}"
+

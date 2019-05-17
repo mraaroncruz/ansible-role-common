@@ -1,0 +1,14 @@
+---
+
+- name: Set locales
+  locale_gen:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default('present') }}"
+  with_items:
+    - name: en_US.UTF-8
+
+- name: Set default locale
+  lineinfile:
+    dest: "/etc/default/locale"
+    regexp: "LANG="
+    line: "LANG=C.UTF-8"

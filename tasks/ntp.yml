@@ -1,0 +1,11 @@
+---
+
+- name: Install chrony
+  apt:
+    name: chrony
+
+- name: Run and enable chrony
+  service:
+    name: chrony
+    state: started
+    enabled: yes

@@ -1,0 +1,24 @@
+---
+
+- name: Upgrade system
+  apt:
+    upgrade: dist
+    update_cache: yes
+
+
+- name: Install a list of packages
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - acl
+    - git
+    - htop
+    - iftop
+    - dstat
+    - sysstat
+    - rsync
+    - dnsutils
+    - python3-pip
+    - curl
+    - vim
