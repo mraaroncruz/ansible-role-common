@@ -6,7 +6,8 @@ HostKey /etc/ssh/ssh_host_dsa_key
 HostKey /etc/ssh/ssh_host_ecdsa_key
 HostKey /etc/ssh/ssh_host_ed25519_key
 
-#PermitRootLogin no
+PermitRootLogin no
+PasswordAuthentication no
 
 PrintMotd no
 AcceptEnv LANG LC_*
